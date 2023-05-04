@@ -19,9 +19,10 @@ RUN pip3 install \
     adal \
     azure-mgmt-compute \
     prometheus_client \
-    elasticsearch==7.7.0
+    elasticsearch
 
-COPY . /tmp/backups
-RUN cd /tmp/backups && \
-  python3 setup.py sdist && \
-  pip3 install dist/backups-2.4.1.tar.gz
+WORKDIR /opt/backups
+COPY . .
+
+RUN python3 setup.py install
+ENTRYPOINT ["./docker-entrypoint.sh"]

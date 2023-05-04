@@ -1,0 +1,13 @@
+version: '3'
+services:
+  backups:
+    container_name: backups
+    # build: .
+    image: aravindha1234u/backups
+    restart: always
+    environment:
+      - CRON=0 * * * *
+    volumes:
+      - ./backup.cfg:/opt/backups/backup.cfg
+      # - /home/ubuntu/backup1:/backup1
+      # - /home/ubuntu/backup2:/backup2
