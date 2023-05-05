@@ -17,6 +17,7 @@ class MySQL(BackupSource):
         self.dbuser = config['dbuser']
         self.dbpass = config['dbpass']
         self.dbname = config['dbname']
+        self.dbport = config.get("dbport") or '3306'
         if 'defaults' in config:
             self.defaults = config['defaults']
         if 'noevents' in config:
@@ -34,9 +35,10 @@ class MySQL(BackupSource):
             credsfile.write(
                 "[client]\n" \
                 "host=%s\n" \
+                "port=%s\n" \
                 "user=%s\n" \
                 "password=%s\n\n" % \
-                (self.dbhost, self.dbuser, self.dbpass)
+                (self.dbhost, self.dbport, self.dbuser, self.dbpass)
             )
             credsfile.flush()
             credsfile.close()

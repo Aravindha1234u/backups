@@ -17,6 +17,7 @@ class PostgreSQL(BackupSource):
         self.dbuser = config['dbuser']
         self.dbpass = config['dbpass']
         self.dbname = config['dbname']
+        self.dbport = config.get("dbport") or '5432'
         if 'defaults' in config:
             self.defaults = config['defaults']
 
@@ -26,7 +27,7 @@ class PostgreSQL(BackupSource):
         with open(credsfilename, 'w') as credsfile:
             credsfile.write(
                 "%s:%s:%s:%s:%s\n" % \
-                (self.dbhost, '5432', self.dbname, self.dbuser, self.dbpass)
+                (self.dbhost, self.dbport, self.dbname, self.dbuser, self.dbpass)
             )
             credsfile.flush()
             credsfile.close()

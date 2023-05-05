@@ -1,6 +1,7 @@
 .git*
 
 *.pyc
+backup.cfg
 
 Dockerfile
 docker*

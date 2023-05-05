@@ -19,6 +19,7 @@ class MySQLSSH(BackupSource):
         self.dbuser = config['dbuser']
         self.dbpass = config['dbpass']
         self.dbname = config['dbname']
+        self.dbport = config.get("dbport") or '3306'
         if 'noevents' in config:
             self.noevents = config['noevents']
         if 'options' in config:
@@ -31,7 +32,7 @@ class MySQLSSH(BackupSource):
         dumpfile = open(dumpfilename, 'wb')
         dumpargs = [
             'ssh', ('%s@%s' % (self.sshuser, self.sshhost)),
-            'mysqldump', ('--host=%s' % self.dbhost), ('--user=%s' % self.dbuser), ('--password=%s' % self.dbpass), '-R']
+            'mysqldump', ('--host=%s' % self.dbhost), ('--port=%s' % self.dbport), ('--user=%s' % self.dbuser), ('--password=%s' % self.dbpass), '-R']
         if not 'noevents' in dir(self) or not self.noevents:
             dumpargs.append('--events')
         all_databases = False
