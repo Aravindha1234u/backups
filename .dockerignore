@@ -4,4 +4,4 @@
 backup.cfg
 
 Dockerfile
-docker*
+docker-compose.yml

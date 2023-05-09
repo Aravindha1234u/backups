@@ -37,7 +37,7 @@ class PostgreSQL(BackupSource):
             dumpfilename = '%s/%s.sql' % (self.tmpdir, self.id)
             logging.info("Backing up '%s' (%s)..." % (self.name, self.type))
             dumpfile = open(dumpfilename, 'wb')
-            dumpargs = ['pg_dump', '-h', self.dbhost, '--username', self.dbuser, self.dbname]
+            dumpargs = ['pg_dump', '-h', self.dbhost, '-p', self.dbport, '--username', self.dbuser, self.dbname]
             dumpenv = os.environ.copy()
             dumpenv['PGPASSFILE'] = credsfilename
             dumpproc1 = subprocess.Popen(dumpargs, stdout=dumpfile, stderr=subprocess.PIPE, env=dumpenv)

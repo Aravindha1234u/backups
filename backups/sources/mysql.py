@@ -49,7 +49,7 @@ class MySQL(BackupSource):
             dumpfilename = '%s/%s.sql' % (self.tmpdir, self.id)
             logging.info("Backing up '%s' (%s)..." % (self.name, self.type))
             dumpfile = open(dumpfilename, 'wb')
-            dumpargs = ['mysqldump', ('--defaults-file=%s' % credsfilename), ('--host=%s' % self.dbhost), '-R']
+            dumpargs = ['mysqldump', ('--defaults-file=%s' % credsfilename), ('--host=%s' % self.dbhost), ('--port=%s' % self.dbport), '-R']
             if not 'noevents' in dir(self) or not self.noevents:
                 dumpargs.append('--events')
             all_databases = False
